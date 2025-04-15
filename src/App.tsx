@@ -8,9 +8,16 @@ function App() {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
-  const [randomizedQuizData, setRandomizedQuizData] = useState(randomizeQuiz(quizData));
+  const [quizLength, setQuizLength] = useState<number | null>(null);
+  const [randomizedQuizData, setRandomizedQuizData] = useState<typeof quizData>([]);
 
   const currentQuiz = randomizedQuizData[currentQuizIndex];
+
+  const handleQuizLengthSelect = (length: number) => {
+    setQuizLength(length);
+    const selectedQuestions = randomizeQuiz(quizData).slice(0, length);
+    setRandomizedQuizData(selectedQuestions);
+  };
 
   const handleAnswerSelect = (index: number) => {
     setSelectedAnswer(index);
@@ -29,17 +36,28 @@ function App() {
     } else {
       // クイズ終了時の処理
       alert(`クイズ終了！ あなたのスコアは ${score}/${randomizedQuizData.length} です！`);
-      // クイズをリセットして新しいランダム順序で再開
-      setRandomizedQuizData(randomizeQuiz(quizData));
+      // クイズをリセットしてタイトル画面に戻る
+      setQuizLength(null);
       setCurrentQuizIndex(0);
       setScore(0);
+      setRandomizedQuizData([]);
     }
   };
 
-  // コンポーネントがマウントされたときにクイズをランダム化
-  useEffect(() => {
-    setRandomizedQuizData(randomizeQuiz(quizData));
-  }, []);
+  if (!quizLength) {
+    return (
+      <div className="quiz-container">
+        <h1>NARクイズ</h1>
+        <div className="quiz-length-selection">
+          <h2>問題数を選択してください</h2>
+          <div className="length-buttons">
+            <button onClick={() => handleQuizLengthSelect(10)}>10問</button>
+            <button onClick={() => handleQuizLengthSelect(30)}>30問</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="quiz-container">
