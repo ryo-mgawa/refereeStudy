@@ -44,6 +44,16 @@ function App() {
     }
   };
 
+  const handleRetire = () => {
+    // リタイア時の処理
+    alert(`リタイア！ あなたのスコアは ${score}/${randomizedQuizData.length} です！`);
+    // クイズをリセットしてタイトル画面に戻る
+    setQuizLength(null);
+    setCurrentQuizIndex(0);
+    setScore(0);
+    setRandomizedQuizData([]);
+  };
+
   if (!quizLength) {
     return (
       <div className="quiz-container">
@@ -97,6 +107,13 @@ function App() {
             </button>
           </div>
         )}
+        <button 
+          onClick={handleRetire}
+          className="retire-button"
+          disabled={showResult}
+        >
+          リタイア
+        </button>
       </div>
     </div>
   )

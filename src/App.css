@@ -143,3 +143,25 @@ h2 {
 .length-buttons button:hover {
   background-color: #45a049;
 }
+
+.retire-button {
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.retire-button:hover:not(:disabled) {
+  background-color: #cc0000;
+}
+
+.retire-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
