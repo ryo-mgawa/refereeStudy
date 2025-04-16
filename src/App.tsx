@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
 import { quizData } from './data/quizData'
 import { randomizeQuiz } from './utils/quizUtils'
+import ScoreDisplay from './components/ScoreDisplay'
 
 function App() {
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
@@ -10,6 +11,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [quizLength, setQuizLength] = useState<number | null>(null);
   const [randomizedQuizData, setRandomizedQuizData] = useState<typeof quizData>([]);
+  const [showScore, setShowScore] = useState(false);
 
   const currentQuiz = randomizedQuizData[currentQuizIndex];
 
@@ -34,25 +36,31 @@ function App() {
     if (currentQuizIndex < randomizedQuizData.length - 1) {
       setCurrentQuizIndex(currentQuizIndex + 1);
     } else {
-      // クイズ終了時の処理
-      alert(`クイズ終了！ あなたのスコアは ${score}/${randomizedQuizData.length} です！`);
-      // クイズをリセットしてタイトル画面に戻る
-      setQuizLength(null);
-      setCurrentQuizIndex(0);
-      setScore(0);
-      setRandomizedQuizData([]);
+      setShowScore(true);
     }
   };
 
   const handleRetire = () => {
-    // リタイア時の処理
-    alert(`リタイア！ あなたのスコアは ${score}/${randomizedQuizData.length} です！`);
-    // クイズをリセットしてタイトル画面に戻る
+    setShowScore(true);
+  };
+
+  const handleRestart = () => {
     setQuizLength(null);
     setCurrentQuizIndex(0);
     setScore(0);
     setRandomizedQuizData([]);
+    setShowScore(false);
   };
+
+  if (showScore) {
+    return (
+      <ScoreDisplay
+        score={score}
+        totalQuestions={randomizedQuizData.length}
+        onRestart={handleRestart}
+      />
+    );
+  }
 
   if (!quizLength) {
     return (
