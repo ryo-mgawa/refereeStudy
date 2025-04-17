@@ -71,6 +71,7 @@ function App() {
           <div className="length-buttons">
             <button onClick={() => handleQuizLengthSelect(10)}>10問</button>
             <button onClick={() => handleQuizLengthSelect(30)}>30問</button>
+            <button onClick={() => handleQuizLengthSelect(50)}>50問</button>
           </div>
         </div>
       </div>
