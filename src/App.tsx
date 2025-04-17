@@ -25,6 +25,11 @@ function App() {
     setSelectedAnswer(index);
     setShowResult(true);
     
+    if (currentQuiz.correctAnswer === 99) {
+      // Don't update score for unknown answers
+      return;
+    }
+    
     if (index === currentQuiz.correctAnswer) {
       setScore(score + 1);
     }
@@ -106,7 +111,9 @@ function App() {
         {showResult && (
           <div className="result">
             <p>
-              {selectedAnswer === currentQuiz.correctAnswer
+              {currentQuiz.correctAnswer === 99 
+                ? 'この問題の正解は未定です。'
+                : selectedAnswer === currentQuiz.correctAnswer
                 ? '正解です！'
                 : '不正解です。'}
             </p>
