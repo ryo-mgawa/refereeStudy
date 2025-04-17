@@ -1,9 +1,9 @@
 import { Quiz } from '../data/quizData';
 
 /**
- * Shuffles an array using the Fisher-Yates algorithm
- * @param array The array to shuffle
- * @returns A new shuffled array
+ * Fisher-Yatesアルゴリズムを使用して配列をシャッフルする
+ * @param array シャッフルする配列
+ * @returns シャッフルされた新しい配列
  */
 export function shuffleArray<T>(array: T[]): T[] {
   const newArray = [...array];
@@ -15,27 +15,33 @@ export function shuffleArray<T>(array: T[]): T[] {
 }
 
 /**
- * Randomizes the order of quiz questions and answer options
- * @param quizData The original quiz data
- * @returns A new array with randomized questions and options
+ * クイズの問題と回答オプションの順序をランダム化する
+ * @param quizData 元のクイズデータ
+ * @returns 問題とオプションがランダム化された新しい配列
  */
 export function randomizeQuiz(quizData: Quiz[]): Quiz[] {
-  // First shuffle the questions
-  const shuffledQuestions = shuffleArray(quizData);
+  // correctAnswer = 99の問題を除外
+  const filteredQuestions = quizData.filter(quiz => quiz.correctAnswer !== 99);
   
-  // Then shuffle the options for each question
+  // まず問題をシャッフル
+  const shuffledQuestions = shuffleArray(filteredQuestions);
+  
+  // 次に各問題のオプションをシャッフル
   return shuffledQuestions.map(quiz => {
     const shuffledOptions = shuffleArray(quiz.options);
     
-    // Find the new index of the correct answer
+    // 正解の新しいインデックスを見つける
     const correctAnswer = shuffledOptions.findIndex(
       option => option === quiz.options[quiz.correctAnswer]
     );
     
     return {
+      type: quiz.type,
+      category: quiz.category,
       question: quiz.question,
       options: shuffledOptions,
-      correctAnswer
+      correctAnswer,
+      supplement: quiz.supplement
     };
   });
 } 
