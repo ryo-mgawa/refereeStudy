@@ -9,7 +9,8 @@ import {
   Stack,
   Paper,
   ThemeIcon,
-  rem
+  rem,
+  Progress
 } from '@mantine/core';
 import { IconCheck, IconX } from '@tabler/icons-react';
 import './App.css'
@@ -99,6 +100,12 @@ function App() {
       <Card shadow="sm" padding="lg" radius="md" withBorder>
         <Stack gap="md">
           <Title order={2} ta="center">問題 {currentQuizIndex + 1}/{randomizedQuizData.length}</Title>
+          <Progress 
+            value={(currentQuizIndex + 1) / randomizedQuizData.length * 100} 
+            size="xl" 
+            radius="xl"
+            color="blue"
+          />
           <Text size="lg" ta="center" fw={500}>{currentQuiz.question}</Text>
           <Stack gap="sm">
             {currentQuiz.options.map((option, index) => (
