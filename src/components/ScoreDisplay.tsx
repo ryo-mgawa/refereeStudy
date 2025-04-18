@@ -18,22 +18,28 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, totalQuestions, onRe
           <ThemeIcon size={80} radius="md" color="yellow">
             <IconTrophy style={{ width: rem(40), height: rem(40) }} />
           </ThemeIcon>
-          
-          <Title order={1} ta="center">クイズ結果</Title>
-          
+
+          <Title order={1} ta="center">
+            クイズ結果
+          </Title>
+
           <Group gap="xs" align="center">
             <Text size="xl" fw={700} c="dimmed">
               {score}
             </Text>
-            <Text size="xl" fw={700} c="dimmed">/</Text>
-            <Text size="xl" fw={700} c="dimmed">{totalQuestions}</Text>
+            <Text size="xl" fw={700} c="dimmed">
+              /
+            </Text>
+            <Text size="xl" fw={700} c="dimmed">
+              {totalQuestions}
+            </Text>
           </Group>
-          
+
           <Text size="2rem" fw={700} c="blue">
             {percentage}%
           </Text>
-          
-          <Button 
+
+          <Button
             onClick={onRestart}
             size="lg"
             leftSection={<IconRefresh style={{ width: rem(20), height: rem(20) }} />}
@@ -46,4 +52,4 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, totalQuestions, onRe
   );
 };
 
-export default ScoreDisplay; 
+export default ScoreDisplay;

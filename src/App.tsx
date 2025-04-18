@@ -1,22 +1,22 @@
-import { useState } from 'react'
-import { 
-  Container, 
-  Title, 
-  Text, 
-  Button, 
-  Group, 
-  Card, 
+import { useState } from 'react';
+import {
+  Container,
+  Title,
+  Text,
+  Button,
+  Group,
+  Card,
   Stack,
   Paper,
   ThemeIcon,
   rem,
-  Progress
+  Progress,
 } from '@mantine/core';
 import { IconCheck, IconX } from '@tabler/icons-react';
-import './App.css'
-import { quizData } from './data/quizData'
-import { randomizeQuiz } from './utils/quizUtils'
-import ScoreDisplay from './components/ScoreDisplay'
+import './App.css';
+import { quizData } from './data/quizData';
+import { randomizeQuiz } from './utils/quizUtils';
+import ScoreDisplay from './components/ScoreDisplay';
 
 function App() {
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
@@ -38,7 +38,7 @@ function App() {
   const handleAnswerSelect = (index: number) => {
     setSelectedAnswer(index);
     setShowResult(true);
-    
+
     if (index === currentQuiz.correctAnswer) {
       setScore(score + 1);
     }
@@ -79,13 +79,19 @@ function App() {
   if (!quizLength) {
     return (
       <Container size="sm" py="xl">
-        <Title order={1} ta="center" mb="xl">NARクイズ</Title>
+        <Title order={1} ta="center" mb="xl">
+          NARクイズ
+        </Title>
         <Card shadow="sm" padding="lg" radius="md" withBorder>
           <Stack align="center" gap="md">
             <Title order={2}>問題数を選択してください</Title>
             <Group>
-              <Button variant="light" onClick={() => handleQuizLengthSelect(10)}>10問</Button>
-              <Button variant="light" onClick={() => handleQuizLengthSelect(30)}>30問</Button>
+              <Button variant="light" onClick={() => handleQuizLengthSelect(10)}>
+                10問
+              </Button>
+              <Button variant="light" onClick={() => handleQuizLengthSelect(30)}>
+                30問
+              </Button>
               {/* <Button variant="light" onClick={() => handleQuizLengthSelect(50)}>50問</Button> */}
             </Group>
           </Stack>
@@ -96,67 +102,87 @@ function App() {
 
   return (
     <Container size="sm" py="xl">
-      <Title order={1} ta="center" mb="xl">NARクイズ</Title>
+      <Title order={1} ta="center" mb="xl">
+        NARクイズ
+      </Title>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
         <Stack gap="md">
-          <Title order={2} ta="center">問題 {currentQuizIndex + 1}/{randomizedQuizData.length}</Title>
-          <Progress 
-            value={(currentQuizIndex + 1) / randomizedQuizData.length * 100} 
-            size="xl" 
+          <Title order={2} ta="center">
+            問題 {currentQuizIndex + 1}/{randomizedQuizData.length}
+          </Title>
+          <Progress
+            value={((currentQuizIndex + 1) / randomizedQuizData.length) * 100}
+            size="xl"
             radius="xl"
             color="blue"
           />
-          <Text size="lg" ta="center" fw={500}>{currentQuiz.question}</Text>
+          <Text size="lg" ta="center" fw={500}>
+            {currentQuiz.question}
+          </Text>
           <Stack gap="sm">
             {currentQuiz.options.map((option, index) => (
               <Button
                 key={index}
                 onClick={() => handleAnswerSelect(index)}
                 disabled={showResult}
-                variant={showResult 
-                  ? index === currentQuiz.correctAnswer 
-                    ? 'light' 
-                    : selectedAnswer === index 
-                    ? 'light' 
+                variant={
+                  showResult
+                    ? index === currentQuiz.correctAnswer
+                      ? 'light'
+                      : selectedAnswer === index
+                        ? 'light'
+                        : 'default'
                     : 'default'
-                  : 'default'
                 }
-                color={showResult 
-                  ? index === currentQuiz.correctAnswer 
-                    ? 'green' 
-                    : selectedAnswer === index 
-                    ? 'red' 
-                    : 'gray'
-                  : 'blue'
+                color={
+                  showResult
+                    ? index === currentQuiz.correctAnswer
+                      ? 'green'
+                      : selectedAnswer === index
+                        ? 'red'
+                        : 'gray'
+                    : 'blue'
                 }
                 fullWidth
                 styles={{
                   inner: {
                     whiteSpace: 'normal',
                     height: 'auto',
-                    minHeight: '2.25rem'
+                    minHeight: '2.25rem',
                   },
                   label: {
                     whiteSpace: 'pre-wrap',
-                    textAlign: 'center'
-                  }
+                    textAlign: 'center',
+                  },
                 }}
-                leftSection={showResult && index === currentQuiz.correctAnswer ? (
-                  <ThemeIcon color="green" size="sm">
-                    <IconCheck style={{ width: rem(16), height: rem(16) }} />
-                  </ThemeIcon>
-                ) : showResult && selectedAnswer === index && index !== currentQuiz.correctAnswer ? (
-                  <ThemeIcon color="red" size="sm">
-                    <IconX style={{ width: rem(16), height: rem(16) }} />
-                  </ThemeIcon>
-                ) : null}
+                leftSection={
+                  showResult && index === currentQuiz.correctAnswer ? (
+                    <ThemeIcon color="green" size="sm">
+                      <IconCheck style={{ width: rem(16), height: rem(16) }} />
+                    </ThemeIcon>
+                  ) : showResult &&
+                    selectedAnswer === index &&
+                    index !== currentQuiz.correctAnswer ? (
+                    <ThemeIcon color="red" size="sm">
+                      <IconX style={{ width: rem(16), height: rem(16) }} />
+                    </ThemeIcon>
+                  ) : null
+                }
               >
                 {option}
               </Button>
             ))}
           </Stack>
           {showResult && (
-            <Paper p="md" withBorder bg={selectedAnswer === currentQuiz.correctAnswer ? 'var(--mantine-color-green-0)' : 'var(--mantine-color-red-0)'}>
+            <Paper
+              p="md"
+              withBorder
+              bg={
+                selectedAnswer === currentQuiz.correctAnswer
+                  ? 'var(--mantine-color-green-0)'
+                  : 'var(--mantine-color-red-0)'
+              }
+            >
               <Stack align="center" gap="sm">
                 <Text fw={500} c={selectedAnswer === currentQuiz.correctAnswer ? 'green' : 'red'}>
                   {selectedAnswer === currentQuiz.correctAnswer ? '正解です！' : '不正解です。'}
@@ -167,18 +193,13 @@ function App() {
               </Stack>
             </Paper>
           )}
-          <Button 
-            onClick={handleRetire}
-            variant="subtle"
-            color="gray"
-            disabled={showResult}
-          >
+          <Button onClick={handleRetire} variant="subtle" color="gray" disabled={showResult}>
             リタイア
           </Button>
         </Stack>
       </Card>
     </Container>
-  )
+  );
 }
 
-export default App
+export default App;

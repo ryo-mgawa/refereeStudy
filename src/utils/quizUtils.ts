@@ -22,26 +22,26 @@ export function shuffleArray<T>(array: T[]): T[] {
 export function randomizeQuiz(quizData: Quiz[]): Quiz[] {
   // correctAnswer = 99の問題を除外
   const filteredQuestions = quizData.filter(quiz => quiz.correctAnswer !== 99);
-  
+
   // まず問題をシャッフル
   const shuffledQuestions = shuffleArray(filteredQuestions);
-  
+
   // 次に各問題のオプションをシャッフル
   return shuffledQuestions.map(quiz => {
     const shuffledOptions = shuffleArray(quiz.options);
-    
+
     // 正解の新しいインデックスを見つける
     const correctAnswer = shuffledOptions.findIndex(
       option => option === quiz.options[quiz.correctAnswer]
     );
-    
+
     return {
       type: quiz.type,
       category: quiz.category,
       question: quiz.question,
       options: shuffledOptions,
       correctAnswer,
-      supplement: quiz.supplement
+      supplement: quiz.supplement,
     };
   });
-} 
+}
