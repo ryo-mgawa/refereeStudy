@@ -19,7 +19,7 @@ export const quizData: Quiz[] = [
       "白旗",
       "赤旗",
     ],
-    correctAnswer: 1 //0は間違い
+    correctAnswer: 99 //0は間違い
   },
   {
     type: '風力計測',
