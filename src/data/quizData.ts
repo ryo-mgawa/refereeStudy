@@ -657,7 +657,7 @@ export const quizData: Quiz[] = [
       "有効な投てき",
       "無効の投てき",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
   },
   {
     type: '投擲',
