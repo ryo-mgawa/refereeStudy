@@ -86,7 +86,7 @@ function App() {
             <Group>
               <Button variant="light" onClick={() => handleQuizLengthSelect(10)}>10問</Button>
               <Button variant="light" onClick={() => handleQuizLengthSelect(30)}>30問</Button>
-              <Button variant="light" onClick={() => handleQuizLengthSelect(50)}>50問</Button>
+              {/* <Button variant="light" onClick={() => handleQuizLengthSelect(50)}>50問</Button> */}
             </Group>
           </Stack>
         </Card>
