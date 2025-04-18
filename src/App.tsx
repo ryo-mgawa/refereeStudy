@@ -130,6 +130,17 @@ function App() {
                   : 'blue'
                 }
                 fullWidth
+                styles={{
+                  inner: {
+                    whiteSpace: 'normal',
+                    height: 'auto',
+                    minHeight: '2.25rem'
+                  },
+                  label: {
+                    whiteSpace: 'pre-wrap',
+                    textAlign: 'center'
+                  }
+                }}
                 leftSection={showResult && index === currentQuiz.correctAnswer ? (
                   <ThemeIcon color="green" size="sm">
                     <IconCheck style={{ width: rem(16), height: rem(16) }} />
