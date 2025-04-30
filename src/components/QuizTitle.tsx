@@ -6,4 +6,4 @@ export function QuizTitle() {
       NARクイズ
     </Title>
   );
-} 
+}

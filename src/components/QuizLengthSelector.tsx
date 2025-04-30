@@ -24,4 +24,4 @@ export function QuizLengthSelector({ onSelectLength }: QuizLengthSelectorProps) 
       </Card>
     </Container>
   );
-} 
+}

@@ -59,4 +59,4 @@ export function QuizQuestion({
       </Card>
     </Container>
   );
-} 
+}

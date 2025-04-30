@@ -70,4 +70,4 @@ export function QuizOptions({
       ))}
     </Stack>
   );
-} 
+}

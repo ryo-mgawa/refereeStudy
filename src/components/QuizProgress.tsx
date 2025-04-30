@@ -19,4 +19,4 @@ export function QuizProgress({ currentIndex, totalQuestions }: QuizProgressProps
       />
     </>
   );
-} 
+}

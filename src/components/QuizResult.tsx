@@ -17,10 +17,8 @@ export function QuizResult({ isCorrect, onNext, isLastQuestion }: QuizResultProp
         <Text fw={500} c={isCorrect ? 'green' : 'red'}>
           {isCorrect ? '正解です！' : '不正解です。'}
         </Text>
-        <Button onClick={onNext}>
-          {isLastQuestion ? 'クイズを終了' : '次の問題へ'}
-        </Button>
+        <Button onClick={onNext}>{isLastQuestion ? 'クイズを終了' : '次の問題へ'}</Button>
       </Stack>
     </Paper>
   );
-} 
+}
