@@ -13,6 +13,7 @@ function App() {
   const [quizLength, setQuizLength] = useState<number | null>(null);
   const [randomizedQuizData, setRandomizedQuizData] = useState<typeof quizData>([]);
   const [showScore, setShowScore] = useState(false);
+  const [startTime, setStartTime] = useState<Date | null>(null);
 
   const currentQuiz = randomizedQuizData[currentQuizIndex];
 
@@ -20,6 +21,7 @@ function App() {
     setQuizLength(length);
     const selectedQuestions = randomizeQuiz(quizData).slice(0, length);
     setRandomizedQuizData(selectedQuestions);
+    setStartTime(new Date());
   };
 
   const handleAnswerSelect = (index: number) => {
@@ -51,6 +53,7 @@ function App() {
     setScore(0);
     setRandomizedQuizData([]);
     setShowScore(false);
+    setStartTime(null);
   };
 
   if (showScore) {
@@ -59,6 +62,7 @@ function App() {
         score={score}
         totalQuestions={randomizedQuizData.length}
         onRestart={handleRestart}
+        startTime={startTime}
       />
     );
   }
