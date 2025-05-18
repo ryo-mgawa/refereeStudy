@@ -6,10 +6,16 @@ interface ScoreDisplayProps {
   score: number;
   totalQuestions: number;
   onRestart: () => void;
+  startTime: Date | null;
 }
 
-const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, totalQuestions, onRestart }) => {
+const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, totalQuestions, onRestart, startTime }) => {
   const percentage = Math.round((score / totalQuestions) * 100);
+  
+  // 経過時間を計算
+  const elapsedTime = startTime ? Math.floor((new Date().getTime() - startTime.getTime()) / 1000) : 0;
+  const minutes = Math.floor(elapsedTime / 60);
+  const seconds = elapsedTime % 60;
 
   return (
     <Container size="sm" py="xl">
@@ -37,6 +43,10 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, totalQuestions, onRe
 
           <Text size="2rem" fw={700} c="blue">
             {percentage}%
+          </Text>
+
+          <Text size="lg" fw={500} c="dimmed">
+            所要時間: {minutes}分{seconds}秒
           </Text>
 
           <Button
