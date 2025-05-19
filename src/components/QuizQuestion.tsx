@@ -9,6 +9,7 @@ interface QuizQuestionProps {
     question: string;
     options: string[];
     correctAnswer: number;
+    supplement?: string;
   };
   currentIndex: number;
   totalQuestions: number;
@@ -50,6 +51,7 @@ export function QuizQuestion({
               isCorrect={selectedAnswer === currentQuiz.correctAnswer}
               onNext={onNextQuestion}
               isLastQuestion={currentIndex === totalQuestions - 1}
+              supplement={currentQuiz.supplement}
             />
           )}
           <Button onClick={onRetire} variant="subtle" color="gray" disabled={showResult}>

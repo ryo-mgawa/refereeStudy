@@ -4,9 +4,10 @@ interface QuizResultProps {
   isCorrect: boolean;
   onNext: () => void;
   isLastQuestion: boolean;
+  supplement?: string;
 }
 
-export function QuizResult({ isCorrect, onNext, isLastQuestion }: QuizResultProps) {
+export function QuizResult({ isCorrect, onNext, isLastQuestion, supplement }: QuizResultProps) {
   return (
     <Paper
       p="md"
@@ -17,6 +18,11 @@ export function QuizResult({ isCorrect, onNext, isLastQuestion }: QuizResultProp
         <Text fw={500} c={isCorrect ? 'green' : 'red'}>
           {isCorrect ? '正解です！' : '不正解です。'}
         </Text>
+        {supplement && (
+          <Text size="sm" c="dimmed" ta="center">
+            {supplement}
+          </Text>
+        )}
         <Button onClick={onNext}>{isLastQuestion ? 'クイズを終了' : '次の問題へ'}</Button>
       </Stack>
     </Paper>
